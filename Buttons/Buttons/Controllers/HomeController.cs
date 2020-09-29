@@ -14,8 +14,28 @@ namespace Buttons.Controllers
         public string Colour { get; set; }
     }
 
+    public class Dependency : IDependency
+    {
+        public string GetText()
+        {
+            return "Injected ";
+        }
+    }
+
+    public interface IDependency
+    {
+        string GetText();
+    }
+
     public class HomeController : Controller
     {
+        public IDependency _dependency;
+
+        public HomeController(IDependency dependency)
+        {
+            _dependency = dependency;
+        }
+
         public ActionResult Index()
         {
             using (var client = CreateDocumentClient())
@@ -27,7 +47,7 @@ namespace Buttons.Controllers
                     .AsEnumerable<Entity>()
                     .FirstOrDefault();
 
-                this.ViewBag.Text = entity.Colour;
+                this.ViewBag.Text = _dependency.GetText() + entity.Colour;
                 return View();
             }
         }
