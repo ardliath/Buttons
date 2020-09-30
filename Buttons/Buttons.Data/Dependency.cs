@@ -14,6 +14,17 @@ namespace Buttons.Data
         public async Task<bool> AnswerQuestionAsync(Question question, decimal answer, string username)
         {
             var correct = question.Answer == answer;
+            var user = await GetUserAsync(username);
+            if(user == null)
+            {
+                var newUser = new UserAccount
+                {
+                    EntityType = EntityType.UserAccount,
+                    UserId = username
+                };
+                await UpserttUserAsync(newUser);
+            }
+
             return await Task.FromResult(correct);
         }
 
@@ -75,6 +86,31 @@ namespace Buttons.Data
 
                 //await client.UpsertDocumentAsync(uri, entity);
                 return await Task.FromResult(entity);
+            }
+        }
+
+        public async Task<UserAccount> GetUserAsync(string username)
+        {
+            using (var client = CreateDocumentClient())
+            {
+                var user = client.CreateDocumentQuery<UserAccount>(CreateDocumentCollectionUri(), new FeedOptions { MaxItemCount = 1, EnableCrossPartitionQuery = false })
+                    .Where(u => u.UserId == username)
+                    .Where(s => s.EntityType == EntityType.UserAccount)
+                    .AsEnumerable()
+                    .FirstOrDefault();
+
+                return await Task.FromResult(user);
+            }
+        }
+
+        public async Task<UserAccount> UpserttUserAsync(UserAccount user)
+        {
+            using (var client = CreateDocumentClient())
+            {
+                var uri = CreateDocumentCollectionUri();
+                await client.UpsertDocumentAsync(uri, user);
+
+                return await Task.FromResult(user);
             }
         }
 

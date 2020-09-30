@@ -4,6 +4,7 @@
     {
         Invalid,
         TestEntity,
-        Question
+        Question,
+        UserAccount
     }
 }
