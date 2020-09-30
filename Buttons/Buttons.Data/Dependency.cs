@@ -11,21 +11,21 @@ namespace Buttons.Data
 {
     public class Dependency : IDependency
     {
-        public Entity GetTestEntity()
+        public async Task<Entity> GetTestEntityAsync()
         {
             using (var client = CreateDocumentClient())
             {
                 var uri = UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
 
-                var entity = client.CreateDocumentQuery<Entity>(uri, new FeedOptions { MaxItemCount = 1 })
+                Entity entity = client.CreateDocumentQuery<Entity>(uri, new FeedOptions { MaxItemCount = 1 })
                     //.Where(s => s.CommandCode == commandCode)
                     .AsEnumerable()
                     .FirstOrDefault();
 
                 entity.EntityType = EntityType.TestEntity;
 
-                client.UpsertDocumentAsync(uri, entity);
-                return entity;
+                await client.UpsertDocumentAsync(uri, entity);
+                return await Task.FromResult(entity);
             }
         }
 
@@ -47,6 +47,6 @@ namespace Buttons.Data
     public interface IDependency
     {
         string GetText();
-        Entity GetTestEntity();
+        Task<Entity> GetTestEntityAsync();
     }
 }

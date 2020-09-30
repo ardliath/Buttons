@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,9 +19,9 @@ namespace Buttons.Controllers
             _dependency = dependency;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var testEntity = _dependency.GetTestEntity();
+            var testEntity = await _dependency.GetTestEntityAsync();
 
             var model = new Models.Home.Index
             {
