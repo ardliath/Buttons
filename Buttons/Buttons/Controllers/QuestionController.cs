@@ -54,5 +54,15 @@ namespace Buttons.Controllers
             
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Get(Get get)
+        {
+            var loadedQuestion = await _dependency.GetQuestion(get.Id);
+
+            get.Correct = get.Answer == loadedQuestion.Answer;
+
+            return View(get);
+        }
     }
 }

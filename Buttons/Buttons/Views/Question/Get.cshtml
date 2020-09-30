@@ -23,4 +23,25 @@
         </div>
     }*@
     
+    @if (Model.Correct != null)
+    {
+         if (Model.Correct == true)
+         {
+            <h2>Correct</h2>
+         }
+         else
+         {
+            <h2>Wrong</h2>
+         }
+    }
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.HiddenFor(x => x.Id)
+        @Html.TextBoxFor(x => x.Answer)
+
+        <input type="submit" />
+    }
+
 </div>

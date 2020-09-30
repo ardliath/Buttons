@@ -9,5 +9,9 @@ namespace Buttons.Models.Question
     {
         public string Id { get; set; }
         public string QuestionText { get; set; }
+
+        public decimal Answer { get; set; }
+
+        public bool? Correct { get; set; }
     }
 }
