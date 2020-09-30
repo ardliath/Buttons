@@ -61,10 +61,11 @@ namespace Buttons.Controllers
         public async Task<ActionResult> Get(Get get)
         {
             var loadedQuestion = await _dependency.GetQuestion(get.Id);
+            var correct = await _dependency.AnswerQuestionAsync(loadedQuestion, get.Answer, get.Username);
 
             get.Title = loadedQuestion.Title;
             get.QuestionText = loadedQuestion.Text;
-            get.Correct = get.Answer == loadedQuestion.Answer;
+            get.Correct = correct;
 
             return View(get);
         }

@@ -11,6 +11,12 @@ namespace Buttons.Data
 {
     public class Dependency : IDependency
     {
+        public async Task<bool> AnswerQuestionAsync(Question question, decimal answer, string username)
+        {
+            var correct = question.Answer == answer;
+            return await Task.FromResult(correct);
+        }
+
         public async Task<IEnumerable<Question>> CreateSampleQuestions()
         {
             using (var client = CreateDocumentClient())
@@ -109,5 +115,6 @@ namespace Buttons.Data
         Task<IEnumerable<Question>> ListQuestionsAsync();
         Task<IEnumerable<Question>> CreateSampleQuestions();
         Task<Question> GetQuestion(string id);
+        Task<bool> AnswerQuestionAsync(Question question, decimal answer, string username);
     }
 }

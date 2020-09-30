@@ -11,6 +11,8 @@ namespace Buttons.Models.Question
 
         public string Title { get; set; }
 
+        public string Username { get; set; }
+
         public string QuestionText { get; set; }
 
         public decimal Answer { get; set; }
