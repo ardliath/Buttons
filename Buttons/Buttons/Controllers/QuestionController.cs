@@ -38,7 +38,7 @@ namespace Buttons.Controllers
         public async Task<ActionResult> Create()
         {
             var questions = await _dependency.CreateSampleQuestions();
-            return Json(questions);
+            return View(questions);
         }
     }
 }
