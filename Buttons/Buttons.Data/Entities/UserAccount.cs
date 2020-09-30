@@ -8,6 +8,6 @@ namespace Buttons.Data.Entities
 {
     public class UserAccount : Entity
     {
-
+        public int Score { get; set; }
     }
 }

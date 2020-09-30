@@ -17,13 +17,13 @@ namespace Buttons.Data
             var user = await GetUserAsync(username);
             if(user == null)
             {
-                var newUser = new UserAccount
+                user = new UserAccount
                 {
                     EntityType = EntityType.UserAccount,
                     UserId = username
-                };
-                await UpserttUserAsync(newUser);
+                };                
             }
+            await UpserttUserAsync(user);
 
             return await Task.FromResult(correct);
         }
