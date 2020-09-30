@@ -34,9 +34,10 @@ namespace Buttons.Controllers
                 var model = new Models.Home.Index
                 {
                     TheText = $"The colour from the entity is {entity.Colour}"
-                };                
+                };
                 return View(model);
             }
+
         }
 
         private DocumentClient CreateDocumentClient()
