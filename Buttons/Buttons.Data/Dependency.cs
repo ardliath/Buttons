@@ -23,7 +23,7 @@ namespace Buttons.Data
                     await client.DeleteDocumentAsync(docUri);
                 }
 
-                var uri = UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
+                var uri = CreateDocumentCollectionUri();
                 for (int i = 1; i < 4; i++)
                 {
                     var newQuestion = new Question
@@ -43,9 +43,7 @@ namespace Buttons.Data
         {
             using (var client = CreateDocumentClient())
             {
-                var uri = UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
-
-                TestEntity entity = client.CreateDocumentQuery<TestEntity>(uri, new FeedOptions { MaxItemCount = 1, EnableCrossPartitionQuery = true })
+                TestEntity entity = client.CreateDocumentQuery<TestEntity>(CreateDocumentCollectionUri(), new FeedOptions { MaxItemCount = 1, EnableCrossPartitionQuery = true })
                     .Where(s => s.EntityType == EntityType.TestEntity)
                     .AsEnumerable()
                     .FirstOrDefault();
@@ -66,10 +64,8 @@ namespace Buttons.Data
         }
 
         public async Task<IEnumerable<Question>> ListQuestionsAsync(DocumentClient client)
-        {
-                var uri = UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
-
-                var questions = client.CreateDocumentQuery<Question>(uri, new FeedOptions { EnableCrossPartitionQuery = true })
+        {               
+                var questions = client.CreateDocumentQuery<Question>(CreateDocumentCollectionUri(), new FeedOptions { EnableCrossPartitionQuery = true })
                     .Where(s => s.EntityType == EntityType.Question)
                     .AsEnumerable();
 
@@ -81,6 +77,11 @@ namespace Buttons.Data
             var url = ConfigurationManager.AppSettings["DatabaseEndpoint"];
             var key = ConfigurationManager.AppSettings["DatabaseKey"];
             return new DocumentClient(new Uri(url), key);
+        }
+
+        private Uri CreateDocumentCollectionUri()
+        {
+            return UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
         }
     }
 
