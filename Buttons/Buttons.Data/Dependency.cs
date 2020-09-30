@@ -108,13 +108,4 @@ namespace Buttons.Data
             return UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
         }
     }
-
-    public interface IDependency
-    {
-        Task<TestEntity> GetTestEntityAsync();
-        Task<IEnumerable<Question>> ListQuestionsAsync();
-        Task<IEnumerable<Question>> CreateSampleQuestions();
-        Task<Question> GetQuestion(string id);
-        Task<bool> AnswerQuestionAsync(Question question, decimal answer, string username);
-    }
 }

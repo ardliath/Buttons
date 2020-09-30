@@ -55,6 +55,7 @@
     <Compile Include="Entities\EntityType.cs" />
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\TestEntity.cs" />
+    <Compile Include="IDependency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
