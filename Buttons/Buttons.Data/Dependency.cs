@@ -15,7 +15,9 @@ namespace Buttons.Data
         {
             using (var client = CreateDocumentClient())
             {
-                foreach (var question in await ListQuestionsAsync())
+                var existingQuestions = await ListQuestionsAsync(client);
+
+                foreach (var question in existingQuestions)
                 {
                     var docUri = UriFactory.CreateDocumentUri("Buttons", "Entities", question.ID);
                     await client.DeleteDocumentAsync(docUri);
@@ -32,9 +34,9 @@ namespace Buttons.Data
                     };
                     await client.UpsertDocumentAsync(uri, newQuestion);
                 }
-            }
 
-            return await ListQuestionsAsync();
+                return await ListQuestionsAsync(client);
+            }
         }
 
         public async Task<TestEntity> GetTestEntityAsync()
@@ -43,7 +45,7 @@ namespace Buttons.Data
             {
                 var uri = UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
 
-                TestEntity entity = client.CreateDocumentQuery<TestEntity>(uri, new FeedOptions { MaxItemCount = 1 })
+                TestEntity entity = client.CreateDocumentQuery<TestEntity>(uri, new FeedOptions { MaxItemCount = 1, EnableCrossPartitionQuery = true })
                     .Where(s => s.EntityType == EntityType.TestEntity)
                     .AsEnumerable()
                     .FirstOrDefault();
@@ -56,17 +58,22 @@ namespace Buttons.Data
         }
 
         public async Task<IEnumerable<Question>> ListQuestionsAsync()
-        {
+        {            
             using (var client = CreateDocumentClient())
             {
+                return await ListQuestionsAsync(client);
+            }
+        }
+
+        public async Task<IEnumerable<Question>> ListQuestionsAsync(DocumentClient client)
+        {
                 var uri = UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
 
-                var questions = client.CreateDocumentQuery<Question>(uri, new FeedOptions { })
+                var questions = client.CreateDocumentQuery<Question>(uri, new FeedOptions { EnableCrossPartitionQuery = true })
                     .Where(s => s.EntityType == EntityType.Question)
                     .AsEnumerable();
 
-                return await Task.FromResult(questions);
-            }
+                return await Task.FromResult(questions);            
         }
 
         private DocumentClient CreateDocumentClient()
