@@ -12,7 +12,7 @@ namespace Buttons.Data.Entities
         [JsonProperty(PropertyName = "id")]
         public string ID { get; set; }
 
-
+        public string UserId { get; set; }
 
         public EntityType EntityType { get; set; }
     }

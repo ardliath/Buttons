@@ -1,4 +1,5 @@
 ﻿using Buttons.Data;
+using Buttons.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,16 @@ namespace Buttons.Controllers
         public async Task<ActionResult> Index()
         {
             var questions = await _dependency.ListQuestionsAsync();
-            return Json(questions);
+            var model = new Models.Question.Index
+            {
+                Questions = questions.Select(q => new QuestionSummary
+                {
+                    Id = q.ID,
+                    Text = q.QuestionText
+                })
+            };
+
+            return View(model);
         }
 
 

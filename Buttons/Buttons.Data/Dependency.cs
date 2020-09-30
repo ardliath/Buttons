@@ -20,17 +20,18 @@ namespace Buttons.Data
                 foreach (var question in existingQuestions)
                 {
                     var docUri = UriFactory.CreateDocumentUri("Buttons", "Entities", question.ID);
-                    await client.DeleteDocumentAsync(docUri);
+                    await client.DeleteDocumentAsync(docUri, new RequestOptions { PartitionKey = new Microsoft.Azure.Documents.PartitionKey(question.UserId) });
                 }
 
                 var uri = CreateDocumentCollectionUri();
-                for (int i = 1; i < 4; i++)
+                for (int i = 1; i < 11; i++)
                 {
                     var newQuestion = new Question
                     {
                         QuestionText = $"What is {i} + {i * 2}?",
                         Answer = i * 3,
-                        EntityType = EntityType.Question
+                        EntityType = EntityType.Question,
+                        UserId = "Adam"
                     };
                     await client.UpsertDocumentAsync(uri, newQuestion);
                 }
@@ -67,7 +68,8 @@ namespace Buttons.Data
         {               
                 var questions = client.CreateDocumentQuery<Question>(CreateDocumentCollectionUri(), new FeedOptions { EnableCrossPartitionQuery = true })
                     .Where(s => s.EntityType == EntityType.Question)
-                    .AsEnumerable();
+                    .AsEnumerable()
+                    .ToArray();
 
                 return await Task.FromResult(questions);            
         }
