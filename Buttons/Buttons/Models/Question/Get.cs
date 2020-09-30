@@ -8,6 +8,9 @@ namespace Buttons.Models.Question
     public class Get
     {
         public string Id { get; set; }
+
+        public string Title { get; set; }
+
         public string QuestionText { get; set; }
 
         public decimal Answer { get; set; }

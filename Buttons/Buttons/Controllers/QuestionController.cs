@@ -28,7 +28,8 @@ namespace Buttons.Controllers
                 Questions = questions.Select(q => new QuestionSummary
                 {
                     Id = q.ID,
-                    Text = q.QuestionText
+                    Title = q.Title,
+                    Text = q.Text
                 })
             };
 
@@ -49,7 +50,8 @@ namespace Buttons.Controllers
             var model = new Get
             {
                 Id = id,
-                QuestionText = question.QuestionText
+                Title = question.Title,
+                QuestionText = question.Text
             };
             
             return View(model);
@@ -60,6 +62,8 @@ namespace Buttons.Controllers
         {
             var loadedQuestion = await _dependency.GetQuestion(get.Id);
 
+            get.Title = loadedQuestion.Title;
+            get.QuestionText = loadedQuestion.Text;
             get.Correct = get.Answer == loadedQuestion.Answer;
 
             return View(get);

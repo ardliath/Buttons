@@ -28,7 +28,8 @@ namespace Buttons.Data
                 {
                     var newQuestion = new Question
                     {
-                        QuestionText = $"What is {i} + {i * 2}?",
+                        Title = $"Question {i}",
+                        Text = $"What is {i} + {i * 2}?",
                         Answer = i * 3,
                         EntityType = EntityType.Question,
                         UserId = "Adam"
