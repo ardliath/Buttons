@@ -25,7 +25,7 @@ namespace Buttons.Controllers
 
             var model = new Models.Home.Index
             {
-                TheText = $"The colour from the upserted test entity is {testEntity.Colour}"
+                TheText = $"The colour from the async upserted test entity is {testEntity.Colour}"
             };
             return View(model);
         }
