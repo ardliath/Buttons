@@ -1,6 +1,4 @@
 ﻿using Buttons.Data;
-using Buttons.Data.Entities;
-using Microsoft.Azure.Documents.Client;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,29 +20,13 @@ namespace Buttons.Controllers
 
         public ActionResult Index()
         {
-            using (var client = CreateDocumentClient())
+            var testEntity = _dependency.GetTestEntity();
+
+            var model = new Models.Home.Index
             {
-                var uri = UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
-
-                var entity = client.CreateDocumentQuery<Entity>(uri, new FeedOptions { MaxItemCount = 1 })
-                    //.Where(s => s.CommandCode == commandCode)
-                    .AsEnumerable<Entity>()
-                    .FirstOrDefault();
-
-                var model = new Models.Home.Index
-                {
-                    TheText = $"The colour from the entity is {entity.Colour}"
-                };
-                return View(model);
-            }
-
-        }
-
-        private DocumentClient CreateDocumentClient()
-        {
-            var url = ConfigurationManager.AppSettings["DatabaseEndpoint"];
-            var key = ConfigurationManager.AppSettings["DatabaseKey"];
-            return new DocumentClient(new Uri(url), key);
+                TheText = $"The colour from the test entity is {testEntity.Colour}"
+            };
+            return View(model);
         }
 
         public ActionResult About()
