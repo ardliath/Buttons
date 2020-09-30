@@ -31,8 +31,11 @@ namespace Buttons.Controllers
                     .AsEnumerable<Entity>()
                     .FirstOrDefault();
 
-                this.ViewBag.Text = _dependency.GetText() + entity.Colour;
-                return View();
+                var model = new Models.Home.Index
+                {
+                    TheText = $"The colour from the entity is {entity.Colour}"
+                };                
+                return View(model);
             }
         }
 
