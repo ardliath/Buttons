@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model Buttons.Models.Question.Get
+
+<div class="jumbotron">
+    <h1>@Model.Id</h1>
+
+    
+    <p class="lead">@Model.QuestionText.</p>
+</div>
+
+<div class="row">
+
+    @*@foreach (var item in Model.Questions)
+    {
+        <div class="col-md-4">
+            <h2>@item.Id</h2>
+            <p>
+                @item.Text
+            </p>          
+        </div>
+    }*@
+    
+</div>

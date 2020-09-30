@@ -40,6 +40,21 @@ namespace Buttons.Data
             }
         }
 
+        public Task<Question> GetQuestion(string id)
+        {
+            using (var client = CreateDocumentClient())
+            {
+                Question question = client
+                        .CreateDocumentQuery<Question>(CreateDocumentCollectionUri(), new FeedOptions { MaxItemCount = 1, EnableCrossPartitionQuery = true })
+                        .Where(s => s.EntityType == EntityType.Question)
+                        .Where(q => q.ID == id)
+                        .AsEnumerable()
+                        .FirstOrDefault();
+
+                return Task.FromResult(question);
+            }
+        }
+
         public async Task<TestEntity> GetTestEntityAsync()
         {
             using (var client = CreateDocumentClient())
@@ -91,6 +106,7 @@ namespace Buttons.Data
     {
         Task<TestEntity> GetTestEntityAsync();
         Task<IEnumerable<Question>> ListQuestionsAsync();
-        Task<IEnumerable<Question>> CreateSampleQuestions();        
+        Task<IEnumerable<Question>> CreateSampleQuestions();
+        Task<Question> GetQuestion(string id);
     }
 }

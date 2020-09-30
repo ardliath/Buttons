@@ -1,4 +1,5 @@
 ﻿using Buttons.Data;
+using Buttons.Models.Question;
 using Buttons.Models.Shared;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,20 @@ namespace Buttons.Controllers
         public async Task<ActionResult> Create()
         {
             var questions = await _dependency.CreateSampleQuestions();
-            return View(questions);
+            return View();
+        }
+
+
+        public async Task<ActionResult> Get(string id)
+        {
+            var question = await _dependency.GetQuestion(id);
+            var model = new Get
+            {
+                Id = id,
+                QuestionText = question.QuestionText
+            };
+            
+            return View(model);
         }
     }
 }

@@ -21,6 +21,9 @@
             <p>
                 @item.Text
             </p>          
+            <p>
+                @Html.ActionLink("Go to question", "Get", new { id = @item.Id })
+            </p>
         </div>
     }
     
