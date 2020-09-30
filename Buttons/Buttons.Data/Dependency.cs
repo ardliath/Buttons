@@ -19,10 +19,12 @@ namespace Buttons.Data
 
                 var entity = client.CreateDocumentQuery<Entity>(uri, new FeedOptions { MaxItemCount = 1 })
                     //.Where(s => s.CommandCode == commandCode)
-                    .AsEnumerable<Entity>()
+                    .AsEnumerable()
                     .FirstOrDefault();
 
+                entity.EntityType = EntityType.TestEntity;
 
+                client.UpsertDocumentAsync(uri, entity);
                 return entity;
             }
         }

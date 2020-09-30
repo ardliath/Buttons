@@ -10,5 +10,7 @@ namespace Buttons.Data.Entities
     {
         public string UserId { get; set; }
         public string Colour { get; set; }
+
+        public EntityType EntityType { get; set; }
     }
 }
