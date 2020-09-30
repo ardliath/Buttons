@@ -1,4 +1,6 @@
-﻿using Microsoft.Azure.Documents.Client;
+﻿using Buttons.Data;
+using Buttons.Data.Entities;
+using Microsoft.Azure.Documents.Client;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,24 +10,6 @@ using System.Web.Mvc;
 
 namespace Buttons.Controllers
 {
-    public class Entity
-    {
-        public string UserId { get; set; }
-        public string Colour { get; set; }
-    }
-
-    public class Dependency : IDependency
-    {
-        public string GetText()
-        {
-            return "Injected ";
-        }
-    }
-
-    public interface IDependency
-    {
-        string GetText();
-    }
 
     public class HomeController : Controller
     {
