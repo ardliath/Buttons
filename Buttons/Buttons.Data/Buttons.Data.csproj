@@ -53,6 +53,8 @@
     <Compile Include="Dependency.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityType.cs" />
+    <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\TestEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Buttons.Data.Entities
 {
-    public class Entity
+    public abstract class Entity
     {
         [JsonProperty(PropertyName = "id")]
         public string ID { get; set; }
 
-        public string UserId { get; set; }
-        public string Colour { get; set; }
+
 
         public EntityType EntityType { get; set; }
     }
