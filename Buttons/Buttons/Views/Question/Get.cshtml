@@ -25,18 +25,18 @@
          }
     }
 
-    @using (Html.BeginForm())
+    @if ((bool?)ViewData["IsLoggedIn"] == true)
     {
+        using (Html.BeginForm())
+        {
 
-        @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.Id)
 
-        @Html.LabelFor(x => x.Username)
-        @Html.TextBoxFor(x => x.Username)
+            @Html.LabelFor(x => x.Answer)
+            @Html.TextBoxFor(x => x.Answer)
 
-        @Html.LabelFor(x => x.Answer)
-        @Html.TextBoxFor(x => x.Answer)
-
-        <input type="submit" />
+            <input type="submit" />
+        }
     }
 
 </div>

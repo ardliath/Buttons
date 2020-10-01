@@ -16,6 +16,14 @@ namespace Buttons.Controllers
             {
                 return Session["UserID"] != null;
             }
-        }      
+        }
+
+        protected string CurrentUsername
+        {
+            get
+            {
+                return (string)Session["UserID"];
+            }
+        }
     }
 }
