@@ -45,6 +45,7 @@ namespace Buttons.Controllers
 
 
         [HttpGet]
+        [UserAuthenticationFilter]
         public ActionResult Logout()
         {
             Session.Remove("UserID");

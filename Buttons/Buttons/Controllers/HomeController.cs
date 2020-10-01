@@ -30,8 +30,7 @@ namespace Buttons.Controllers
             };
             return View(model);
         }
-
-        [UserAuthenticationFilter]
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

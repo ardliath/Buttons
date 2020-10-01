@@ -1,5 +1,6 @@
 ﻿using Buttons.Data;
 using Buttons.Data.Entities;
+using Buttons.Filters;
 using Buttons.Models.Question;
 using Buttons.Models.Shared;
 using System;
@@ -37,7 +38,7 @@ namespace Buttons.Controllers
             return View(model);
         }
 
-
+        [UserAuthenticationFilter]
         public async Task<ActionResult> Create()
         {
             var questions = await _dependency.CreateSampleQuestions();
@@ -59,6 +60,7 @@ namespace Buttons.Controllers
         }
 
         [HttpPost]
+        [UserAuthenticationFilter]
         public async Task<ActionResult> Get(Get get)
         {
             var loadedQuestion = await _dependency.GetQuestion(get.Id);
@@ -71,6 +73,7 @@ namespace Buttons.Controllers
             return View(get);
         }
 
+        [UserAuthenticationFilter]
         public async Task<ActionResult> Upsert(string id)
         {
             Models.Question.Upsert model;
@@ -98,6 +101,7 @@ namespace Buttons.Controllers
         }
 
         [HttpPost]
+        [UserAuthenticationFilter]
         public async Task<RedirectToRouteResult>Upsert(Upsert model)
         {
             var question = new Question
