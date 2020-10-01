@@ -1,4 +1,5 @@
 ﻿using Buttons.Data;
+using Buttons.Filters;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -30,6 +31,7 @@ namespace Buttons.Controllers
             return View(model);
         }
 
+        [UserAuthenticationFilter]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
