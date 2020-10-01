@@ -8,7 +8,7 @@
     <h1>Questions</h1>
 
     <h2>The ViewBag contains the value</h2>
-    
+
     <p class="lead">Here are all the questions.</p>
     @if ((bool?)ViewData["IsLoggedIn"] == true)
     {
@@ -18,23 +18,11 @@
 
 <div class="row">
 
-    @foreach (var item in Model.Questions)
-    {
-        <div class="col-md-4">
-            <h2>@item.Title</h2>
-            <p>
-                @item.Text
-            </p>          
-            <p>
-                @Html.ActionLink("Go to question", "Get", new { id = @item.Id })
-            </p>
-            @if ((bool?)ViewData["IsLoggedIn"] == true)
-            {
-               <p>
-                   @Html.ActionLink("Edit Question", "Upsert", new { id = @item.Id })
-               </p>
-            }
-        </div>
-    }
-    
+    <div class="list-group">
+        @foreach (var item in Model.Questions)
+        {
+            @Html.ActionLink(@item.Title, "Get", new { id = @item.Id }, new { @class = "list-group-item" })
+        }
+    </div>
+
 </div>

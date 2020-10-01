@@ -7,7 +7,7 @@
 <div class="jumbotron">
     <h1>@Model.Title</h1>
 
-    
+
     <p class="lead">@Model.QuestionText</p>
 </div>
 
@@ -15,14 +15,14 @@
 
     @if (Model.Correct != null)
     {
-         if (Model.Correct == true)
-         {
+        if (Model.Correct == true)
+        {
             <h2>Correct</h2>
-         }
-         else
-         {
+        }
+        else
+        {
             <h2>Wrong</h2>
-         }
+        }
     }
 
     @if ((bool?)ViewData["IsLoggedIn"] == true)
@@ -38,8 +38,12 @@
             <div class="btn-group">
                 <input type="submit" value="Answer Question" class="btn btn-primary" />
                 @Html.ActionLink("Cancel", "Index", "Question", new { id = Model.Id }, new { @class = "btn btn-danger" })
-            </div>                
+            </div>
         }
+
+        <p>
+            @Html.ActionLink("Edit Question", "Upsert", new { id = Model.Id }, new { @class="btn btn-primary" })
+        </p>
     }
 
 </div>
