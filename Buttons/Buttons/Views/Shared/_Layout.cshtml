@@ -26,6 +26,7 @@
                     <li>@Html.ActionLink("Questions", "Index", "Question")</li>
                     @if ((bool?)ViewData["IsLoggedIn"] == true)
                     {
+                        <li>@Html.ActionLink("My Profile", "Get", "Account")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
                     else

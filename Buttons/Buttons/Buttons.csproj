@@ -161,6 +161,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\Get.cs" />
     <Compile Include="Models\Account\Login.cs" />
     <Compile Include="Models\Home\Index.cs" />
     <Compile Include="Models\Question\Get.cs" />
@@ -210,6 +211,7 @@
     <Content Include="Views\Question\Get.cshtml" />
     <Content Include="Views\Question\Upsert.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Get.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

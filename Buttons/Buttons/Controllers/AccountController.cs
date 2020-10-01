@@ -1,8 +1,10 @@
-﻿using Buttons.Filters;
+﻿using Buttons.Data;
+using Buttons.Filters;
 using Buttons.Models.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,6 +12,13 @@ namespace Buttons.Controllers
 {
     public class AccountController : ControllerBase
     {
+        public IDependency _dependency;
+
+        public AccountController(IDependency dependency)
+        {
+            _dependency = dependency;
+        }
+
         // GET: Account
         public ActionResult Index()
         {
@@ -17,6 +26,30 @@ namespace Buttons.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<ActionResult> Get(string id)
+        {
+            if(id == null && this.IsLoggedIn)
+            {
+                id = this.CurrentUsername;
+            }
+
+            if (id != null)
+            {
+                var user = await _dependency.GetUserAsync(id);
+
+                if (user != null)
+                {
+                    var model = new Models.Account.Get
+                    {
+                        Username = user.UserId
+                    };
+                    return View(model);
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
 
         [HttpGet]
         public ActionResult Login()
