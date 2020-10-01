@@ -1,4 +1,5 @@
-﻿using Buttons.Models.Account;
+﻿using Buttons.Filters;
+using Buttons.Models.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Buttons.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
         // GET: Account
         public ActionResult Index()

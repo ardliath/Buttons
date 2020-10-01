@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Buttons.Controllers
 {
-    public class QuestionController : Controller
+    public class QuestionController : ControllerBase
     {
         public IDependency _dependency;
 

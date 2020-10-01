@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace Buttons.Controllers
 {
 
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
         public IDependency _dependency;
 
