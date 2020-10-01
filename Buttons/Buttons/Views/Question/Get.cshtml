@@ -31,11 +31,14 @@
         {
 
             @Html.HiddenFor(x => x.Id)
-
-            @Html.LabelFor(x => x.Answer)
-            @Html.TextBoxFor(x => x.Answer)
-
-            <input type="submit" />
+            <div class="form-group">
+                @Html.LabelFor(x => x.Answer)
+                @Html.TextBoxFor(x => x.Answer, new { @class = "form-control" })
+            </div>
+            <div class="btn-group">
+                <input type="submit" value="Answer Question" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", "Index", "Question", new { id = Model.Id }, new { @class = "btn btn-danger" })
+            </div>                
         }
     }
 

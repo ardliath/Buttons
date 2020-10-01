@@ -26,8 +26,12 @@
     </div>
 
     <div class="btn-group" role="group">
-        <input type="submit" value="Save Question" class="btn btn-primary" />
-        @Html.ActionLink("Delete Question", "Delete", "Question", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        <input type="submit" value="Save Question" class="btn btn-primary" />                
+        @Html.ActionLink("Cancel", "Index", "Question", new { }, new { @class = "btn btn-warning" })
+        @if (Model.Id != null)        
+        {
+            @Html.ActionLink("Delete Question", "Delete", "Question", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        }
     </div>
 }
 
