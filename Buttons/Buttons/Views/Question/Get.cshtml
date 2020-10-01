@@ -41,9 +41,12 @@
             </div>
         }
 
-        <p>
-            @Html.ActionLink("Edit Question", "Upsert", new { id = Model.Id }, new { @class="btn btn-primary" })
-        </p>
+        <br />
+        <div>
+            <p>
+                @Html.ActionLink("Edit This Question", "Upsert", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            </p>
+        </div>
     }
 
 </div>
