@@ -12,7 +12,7 @@
     <p class="lead">Here are all the questions.</p>
     @if ((bool?)ViewData["IsLoggedIn"] == true)
     {
-        <p>@Html.ActionLink("Create New Question", "Upsert")</p>
+        <p>@Html.ActionLink("Create New Question", "Upsert", new { }, new { @class = "btn btn-primary" })</p>
     }
 </div>
 

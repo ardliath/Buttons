@@ -17,7 +17,7 @@
 
     <div>
         @Html.LabelFor(x => x.Text)
-        @Html.TextBoxFor(x => x.Text)
+        @Html.TextAreaFor(x => x.Text)
     </div>
 
     <div>
@@ -26,8 +26,8 @@
     </div>
 
 
-    <input type="submit" value="Save Question" />
+    <input type="submit" value="Save Question" class="btn btn-primary" />
 }
 
-@Html.ActionLink("Delete Question", "Delete", "Question", new { id = Model.Id}, new { @class = "btn btn-primary" })
+@Html.ActionLink("Delete Question", "Delete", "Question", new { id = Model.Id}, new { @class = "btn btn-danger" })
 
