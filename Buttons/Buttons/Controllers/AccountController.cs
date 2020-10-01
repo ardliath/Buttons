@@ -34,7 +34,7 @@ namespace Buttons.Controllers
 
             if(model.Username == "Adam" && model.Password == "password")
             {
-                Session["UserID"] = Guid.NewGuid();
+                Session["UserID"] = model.Username;
                 return RedirectToAction("Index", "Home");
             }
             else
