@@ -10,19 +10,19 @@
 {
     @Html.HiddenFor(x => x.Id)
 
-    <div>
+    <div class="form-group">
         @Html.LabelFor(x => x.Title)
-        @Html.TextBoxFor(x => x.Title)
+        @Html.TextBoxFor(x => x.Title, new { @class = "form-control"})
     </div>
 
-    <div>
+    <div class="form-group">
         @Html.LabelFor(x => x.Text)
-        @Html.TextAreaFor(x => x.Text)
+        @Html.TextAreaFor(x => x.Text, new { @class = "form-control", @placeholder = "The text of your question" })
     </div>
 
-    <div>
+    <div class="form-group">
         @Html.LabelFor(x => x.Answer)
-        @Html.TextBoxFor(x => x.Answer)
+        @Html.TextBoxFor(x => x.Answer, new { @class = "form-control"})
     </div>
 
     <div class="btn-group" role="group">
