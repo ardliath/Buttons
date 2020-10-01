@@ -42,5 +42,13 @@ namespace Buttons.Controllers
                 return View(model);
             }
         }
+
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session.Remove("UserID");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
