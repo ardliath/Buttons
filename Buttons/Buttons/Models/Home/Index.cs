@@ -6,7 +6,6 @@ using System.Web;
 namespace Buttons.Models.Home
 {
     public class Index
-    {
-        public string TheText { get; set; }
+    {        
     }
 }

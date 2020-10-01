@@ -22,11 +22,8 @@ namespace Buttons.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var testEntity = await _dependency.GetTestEntityAsync();
-
             var model = new Models.Home.Index
             {
-                TheText = $"The colour is {testEntity.Colour}"
             };
             return View(model);
         }
