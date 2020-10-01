@@ -42,7 +42,16 @@ namespace Buttons.Controllers
                 {
                     var model = new Models.Account.Get
                     {
-                        Username = user.UserId
+                        Username = user.UserId,
+                        QuestionsIHaveAnswered = user.QuestionsAttempted
+                            .Where(a => a.Correct)
+                            .OrderBy(q => q.AttemptedDate)
+                            .Select(q => new Models.Shared.QuestionSummary
+                            {
+                                Answered = q.Correct,
+                                Id = q.ID,
+                                Title = q.Title
+                            })
                     };
                     return View(model);
                 }

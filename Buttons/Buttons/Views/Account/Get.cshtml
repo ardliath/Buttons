@@ -6,7 +6,26 @@
 
 <div class="jumbotron">
     <h1>@Model.Username</h1>
+</div>
 
+<div class="row">
 
-    <p class="lead">@Model.Username's Profile</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Correctly Answered Questions
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.QuestionsIHaveAnswered)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(@item.Title, "Get", "Question", new { id = @item.Id }, new { })
+                </td>               
+            </tr>
+        }
+    </table>
+
 </div>
