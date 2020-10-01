@@ -36,9 +36,8 @@ namespace Buttons.Data
                 var existingQuestions = await ListQuestionsAsync(client);
 
                 foreach (var question in existingQuestions)
-                {
-                    var docUri = UriFactory.CreateDocumentUri("Buttons", "Entities", question.ID);
-                    await client.DeleteDocumentAsync(docUri, new RequestOptions { PartitionKey = new Microsoft.Azure.Documents.PartitionKey(question.UserId) });
+                {                    
+                    await DeleteQuestion(client, question.ID, question.UserId);
                 }
 
                 var uri = CreateDocumentCollectionUri();
@@ -57,6 +56,28 @@ namespace Buttons.Data
 
                 return await ListQuestionsAsync(client);
             }
+        }
+
+        public async Task<bool> DeleteQuestion(string id)
+        {
+            using (var client = CreateDocumentClient())
+            {
+                var question = await GetQuestion(client, id);
+                if (question != null)
+                {
+                    await DeleteQuestion(client, id, question.UserId);
+                }
+            }
+
+            return true;
+        }
+
+        public async Task<bool> DeleteQuestion(DocumentClient client, string id, string creator)
+        {
+            var docUri = UriFactory.CreateDocumentUri("Buttons", "Entities", id);
+            await client.DeleteDocumentAsync(docUri, new RequestOptions { PartitionKey = new Microsoft.Azure.Documents.PartitionKey(creator) });
+
+            return true;
         }
 
         public Task<Question> GetQuestion(DocumentClient client, string id)

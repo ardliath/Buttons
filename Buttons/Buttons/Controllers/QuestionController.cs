@@ -117,5 +117,17 @@ namespace Buttons.Controllers
 
             return RedirectToAction("Get", "Question", new { id = question.ID });
         }
+
+        [HttpGet]
+        [UserAuthenticationFilter]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (this.IsLoggedIn)
+            {
+                await _dependency.DeleteQuestion(id);
+            }
+
+            return RedirectToAction("Index", "Question");
+        }
     }
 }
