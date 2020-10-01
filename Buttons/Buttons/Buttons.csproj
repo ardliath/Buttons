@@ -152,12 +152,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Filters\UserAuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\Login.cs" />
     <Compile Include="Models\Home\Index.cs" />
     <Compile Include="Models\Question\Get.cs" />
     <Compile Include="Models\Question\Index.cs" />
@@ -206,6 +208,7 @@
     <Content Include="Views\Question\Create.cshtml" />
     <Content Include="Views\Question\Get.cshtml" />
     <Content Include="Views\Question\Upsert.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
