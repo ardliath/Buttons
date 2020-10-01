@@ -18,11 +18,33 @@
 
 <div class="row">
 
-    <div class="list-group">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Question
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+        </thead>
         @foreach (var item in Model.Questions)
         {
-            @Html.ActionLink(@item.Title, "Get", new { id = @item.Id }, new { @class = "list-group-item" })
+            <tr>
+                <td>
+                    @Html.ActionLink(@item.Title, "Get", new { id = @item.Id }, new {})
+                </td>
+                <td>
+                    @if (item.Answered)
+                    {
+                        <span>
+                            Answered
+                        </span>
+                    }
+                </td>
+            </tr>
         }
-    </div>
+    </table>
 
 </div>

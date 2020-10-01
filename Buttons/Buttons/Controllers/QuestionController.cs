@@ -25,13 +25,22 @@ namespace Buttons.Controllers
         public async Task<ActionResult> Index()
         {
             var questions = await _dependency.ListQuestionsAsync();
+            var currentUser = this.IsLoggedIn
+                ? await _dependency.GetUserAsync(this.CurrentUsername)
+                : null;
+
+            var correctlyAnsweredQuestions = currentUser?.QuestionsAttempted
+                ?.Where(q => q.Correct)
+                ?.Select(q => q.ID);
+
             var model = new Models.Question.Index
             {
                 Questions = questions.Select(q => new QuestionSummary
                 {
                     Id = q.ID,
                     Title = q.Title,
-                    Text = q.Text
+                    Text = q.Text,
+                    Answered = correctlyAnsweredQuestions?.Contains(q.ID) ?? false
                 })
             };
 

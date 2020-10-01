@@ -12,5 +12,6 @@ namespace Buttons.Data
         Task<bool> AnswerQuestionAsync(Question question, decimal answer, string username);
         Task<Question> UpsertQuestionAsync(Question question);
         Task<bool> DeleteQuestion(string id);
+        Task<UserAccount> GetUserAsync(string username);
     }
 }

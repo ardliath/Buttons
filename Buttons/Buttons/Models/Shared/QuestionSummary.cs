@@ -12,5 +12,6 @@ namespace Buttons.Models.Shared
         public string Title { get; set; }
 
         public string Text { get; set; }
+        public bool Answered { get; internal set; }
     }
 }
