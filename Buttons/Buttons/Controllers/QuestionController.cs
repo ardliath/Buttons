@@ -38,13 +38,6 @@ namespace Buttons.Controllers
             return View(model);
         }
 
-        [UserAuthenticationFilter]
-        public async Task<ActionResult> Create()
-        {
-            var questions = await _dependency.CreateSampleQuestions();
-            return View();
-        }
-
 
         public async Task<ActionResult> Get(string id)
         {

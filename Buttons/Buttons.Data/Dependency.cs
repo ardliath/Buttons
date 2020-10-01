@@ -50,35 +50,6 @@ namespace Buttons.Data
             return false;
         }
 
-        public async Task<IEnumerable<Question>> CreateSampleQuestions()
-        {
-            using (var client = CreateDocumentClient())
-            {
-                var existingQuestions = await ListQuestionsAsync(client);
-
-                foreach (var question in existingQuestions)
-                {                    
-                    await DeleteQuestion(client, question.ID, question.UserId);
-                }
-
-                var uri = CreateDocumentCollectionUri();
-                for (int i = 1; i < 11; i++)
-                {
-                    var newQuestion = new Question
-                    {
-                        Title = $"Question {i}",
-                        Text = $"What is {i} + {i * 2}?",
-                        Answer = i * 3,
-                        EntityType = EntityType.Question,
-                        UserId = "Adam"
-                    };
-                    await client.UpsertDocumentAsync(uri, newQuestion);
-                }
-
-                return await ListQuestionsAsync(client);
-            }
-        }
-
         public async Task<bool> DeleteQuestion(string id)
         {
             using (var client = CreateDocumentClient())

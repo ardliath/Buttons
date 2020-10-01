@@ -207,7 +207,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Question\Index.cshtml" />
-    <Content Include="Views\Question\Create.cshtml" />
     <Content Include="Views\Question\Get.cshtml" />
     <Content Include="Views\Question\Upsert.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
