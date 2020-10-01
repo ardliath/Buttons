@@ -13,20 +13,41 @@ namespace Buttons.Data
     public class Dependency : IDependency
     {
         public async Task<bool> AnswerQuestionAsync(Question question, decimal answer, string username)
-        {
-            var correct = question.Answer == answer;
+        {            
             var user = await GetUserAsync(username);
-            if(user == null)
+            if(user != null)
             {
-                user = new UserAccount
-                {
-                    EntityType = EntityType.UserAccount,
-                    UserId = username
-                };                
-            }
-            await UpserttUserAsync(user);
+                var correct = question.Answer == answer;
+                bool hasUserPreviouslyCorrectlyAnsweredQuestion = user.QuestionsAttempted?.Any(q => q.ID == question.ID && q.Correct) ?? false;
 
-            return await Task.FromResult(correct);
+                if (!hasUserPreviouslyCorrectlyAnsweredQuestion)
+                {
+                    question.NumberOfTimesQuestionHasBeenAttempted++;
+                    if (correct)
+                    {
+                        question.NumberOfTimesQuestionHasBeenAnsweredCorrectly++;
+                    }
+                    else
+                    {
+                        question.NumberOfTimesQuestionHasBeenAnsweredIncorrectly++;
+                    }
+                }
+
+                if (user.QuestionsAttempted == null) user.QuestionsAttempted = new List<QuestionsAttempted>();
+                user.QuestionsAttempted.Add(new QuestionsAttempted
+                {
+                    ID = question.ID,
+                    Correct = correct,
+                    Title = question.Title,
+                    AttemptedDate = DateTime.Now
+                });
+
+                await UpserttUserAsync(user);
+                await UpsertQuestionAsync(question);
+                return await Task.FromResult(correct);
+            }
+
+            return false;
         }
 
         public async Task<IEnumerable<Question>> CreateSampleQuestions()

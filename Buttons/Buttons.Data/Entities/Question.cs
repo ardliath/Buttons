@@ -13,5 +13,10 @@ namespace Buttons.Data.Entities
         public string Text { get; set; }
 
         public decimal Answer { get; set; }
+
+        public int NumberOfTimesQuestionHasBeenAttempted { get; set; }
+
+        public int NumberOfTimesQuestionHasBeenAnsweredCorrectly { get; set; }
+        public int NumberOfTimesQuestionHasBeenAnsweredIncorrectly { get; set; }
     }
 }

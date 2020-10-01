@@ -54,6 +54,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityType.cs" />
     <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\QuestionsAttempted.cs" />
     <Compile Include="Entities\TestEntity.cs" />
     <Compile Include="Entities\UserAccount.cs" />
     <Compile Include="IDependency.cs" />
