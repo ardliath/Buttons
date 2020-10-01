@@ -114,7 +114,7 @@ namespace Buttons.Controllers
                 Text = model.Text,
                 Answer = model.Answer,
                 EntityType = EntityType.Question,
-                UserId = "Adam"
+                UserId = this.CurrentUsername
             };
             question = await _dependency.UpsertQuestionAsync(question);
 
