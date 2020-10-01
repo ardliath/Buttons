@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+@model Buttons.Models.Question.Upsert
+
+<h2>@Model.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.Id)
+
+    <div>
+        @Html.LabelFor(x => x.Title)
+        @Html.TextBoxFor(x => x.Title)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Text)
+        @Html.TextBoxFor(x => x.Text)
+    </div>
+
+    <div>
+        @Html.LabelFor(x => x.Answer)
+        @Html.TextBoxFor(x => x.Answer)
+    </div>
+
+
+    <input type="submit" value="Save Question" />
+}
+

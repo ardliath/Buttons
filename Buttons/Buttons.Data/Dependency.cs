@@ -1,4 +1,5 @@
 ﻿using Buttons.Data.Entities;
+using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using System;
 using System.Collections.Generic;
@@ -58,10 +59,8 @@ namespace Buttons.Data
             }
         }
 
-        public Task<Question> GetQuestion(string id)
+        public Task<Question> GetQuestion(DocumentClient client, string id)
         {
-            using (var client = CreateDocumentClient())
-            {
                 Question question = client
                         .CreateDocumentQuery<Question>(CreateDocumentCollectionUri(), new FeedOptions { MaxItemCount = 1, EnableCrossPartitionQuery = true })
                         .Where(s => s.EntityType == EntityType.Question)
@@ -69,7 +68,14 @@ namespace Buttons.Data
                         .AsEnumerable()
                         .FirstOrDefault();
 
-                return Task.FromResult(question);
+                return Task.FromResult(question);            
+        }
+
+        public Task<Question> GetQuestion(string id)
+        {
+            using (var client = CreateDocumentClient())
+            {
+                return GetQuestion(client, id);
             }
         }
 
@@ -111,6 +117,18 @@ namespace Buttons.Data
                 await client.UpsertDocumentAsync(uri, user);
 
                 return await Task.FromResult(user);
+            }
+        }
+
+        public async Task<Question> UpsertQuestionAsync(Question question)
+        {
+            using (var client = CreateDocumentClient())
+            {
+                var uri = CreateDocumentCollectionUri();
+                Document doc = await client.UpsertDocumentAsync(uri, question);
+                question = await GetQuestion(client, doc.Id);
+
+                return await Task.FromResult(question);
             }
         }
 

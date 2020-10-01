@@ -160,6 +160,7 @@
     <Compile Include="Models\Home\Index.cs" />
     <Compile Include="Models\Question\Get.cs" />
     <Compile Include="Models\Question\Index.cs" />
+    <Compile Include="Models\Question\Upsert.cs" />
     <Compile Include="Models\Shared\QuestionSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -203,6 +204,7 @@
     <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\Question\Create.cshtml" />
     <Content Include="Views\Question\Get.cshtml" />
+    <Content Include="Views\Question\Upsert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

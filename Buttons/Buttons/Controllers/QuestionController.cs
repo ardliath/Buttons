@@ -1,4 +1,5 @@
 ﻿using Buttons.Data;
+using Buttons.Data.Entities;
 using Buttons.Models.Question;
 using Buttons.Models.Shared;
 using System;
@@ -68,6 +69,49 @@ namespace Buttons.Controllers
             get.Correct = correct;
 
             return View(get);
+        }
+
+        public async Task<ActionResult> Upsert(string id)
+        {
+            Models.Question.Upsert model;
+            if (id != null)
+            {
+                var loadedQuestion = await _dependency.GetQuestion(id);
+                model = new Models.Question.Upsert
+                {
+                    Id = loadedQuestion?.ID,
+                    Title = loadedQuestion?.Title,
+                    Text = loadedQuestion?.Text,
+                    Answer = loadedQuestion?.Answer ?? 0
+                };
+            }
+            else
+            {
+                model = new Models.Question.Upsert
+                {
+                    Title = "New Question"
+                };
+            }
+
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<RedirectToRouteResult>Upsert(Upsert model)
+        {
+            var question = new Question
+            {
+                ID = model.Id,
+                Title = model.Title,
+                Text = model.Text,
+                Answer = model.Answer,
+                EntityType = EntityType.Question,
+                UserId = "Adam"
+            };
+            question = await _dependency.UpsertQuestionAsync(question);
+
+            return RedirectToAction("Get", "Question", new { id = question.ID });
         }
     }
 }

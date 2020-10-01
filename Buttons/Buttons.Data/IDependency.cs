@@ -11,5 +11,6 @@ namespace Buttons.Data
         Task<IEnumerable<Question>> CreateSampleQuestions();
         Task<Question> GetQuestion(string id);
         Task<bool> AnswerQuestionAsync(Question question, decimal answer, string username);
+        Task<Question> UpsertQuestionAsync(Question question);
     }
 }

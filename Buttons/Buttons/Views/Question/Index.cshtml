@@ -10,6 +10,8 @@
     <h2>The ViewBag contains the value</h2>
     
     <p class="lead">Here are all the questions.</p>
+
+    <p>@Html.ActionLink("Create New Question", "Upsert")</p>
 </div>
 
 <div class="row">
@@ -23,6 +25,9 @@
             </p>          
             <p>
                 @Html.ActionLink("Go to question", "Get", new { id = @item.Id })
+            </p>
+            <p>
+                @Html.ActionLink("Edit Question", "Upsert", new { id = @item.Id })
             </p>
         </div>
     }
