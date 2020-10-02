@@ -168,6 +168,7 @@
     <Compile Include="Models\Question\Index.cs" />
     <Compile Include="Models\Question\Upsert.cs" />
     <Compile Include="Models\Shared\QuestionSummary.cs" />
+    <Compile Include="Models\Shared\UserSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -55,7 +55,13 @@ namespace Buttons.Controllers
             {
                 Id = id,
                 Title = question.Title,
-                QuestionText = question.Text
+                QuestionText = question.Text,
+                UsersCorrectlyAnswered = question.UserAnsweredQuestion?.Where(q => q.Successful)?.OrderBy(q => q.DateAttempted)?.Select(q => new UserSummary
+                {
+                    Id = q.UserId,
+                    Username = q.Username,
+                    Date = q.DateAttempted
+                }) ?? new UserSummary[] { }
             };
             
             return View(model);
@@ -73,6 +79,12 @@ namespace Buttons.Controllers
                 get.Title = loadedQuestion.Title;
                 get.QuestionText = loadedQuestion.Text;
                 get.Correct = correct;
+                get.UsersCorrectlyAnswered = loadedQuestion.UserAnsweredQuestion?.Where(q => q.Successful)?.OrderBy(q => q.DateAttempted)?.Select(q => new UserSummary
+                {
+                    Id = q.UserId,
+                    Username = q.Username,
+                    Date = q.DateAttempted
+                }) ?? new UserSummary[] { };
             }
 
             return View(get);

@@ -49,4 +49,19 @@
         </div>
     }
 
+    <br />
+    <div>
+        @if (Model.UsersCorrectlyAnswered != null && Model.UsersCorrectlyAnswered.Any())
+        {
+            <span>The following users have correctly answered this question: </span>
+            foreach (var user in Model.UsersCorrectlyAnswered)
+            {
+                <span>
+                    @Html.ActionLink(@user.Username, "Get", "Account", new { id = @user.Username }, new { })
+                    , 
+                </span>
+            }
+        }
+    </div>
+
 </div>
