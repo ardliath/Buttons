@@ -18,5 +18,7 @@ namespace Buttons.Data.Entities
 
         public int NumberOfTimesQuestionHasBeenAnsweredCorrectly { get; set; }
         public int NumberOfTimesQuestionHasBeenAnsweredIncorrectly { get; set; }
+
+        public List<UserAnsweredQuestion> UserAnsweredQuestion { get; set; }
     }
 }

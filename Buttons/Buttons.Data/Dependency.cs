@@ -31,16 +31,28 @@ namespace Buttons.Data
                     {
                         question.NumberOfTimesQuestionHasBeenAnsweredIncorrectly++;
                     }
+
+                    var now = DateTime.Now;
+                    if (user.QuestionsAttempted == null) user.QuestionsAttempted = new List<QuestionsAttempted>();
+                    user.QuestionsAttempted.Add(new QuestionsAttempted
+                    {
+                        ID = question.ID,
+                        Correct = correct,
+                        Title = question.Title,
+                        AttemptedDate = now
+                    });
+
+                    if (question.UserAnsweredQuestion == null) question.UserAnsweredQuestion = new List<UserAnsweredQuestion>();
+                    question.UserAnsweredQuestion.Add(new UserAnsweredQuestion
+                    {
+                        UserId = user.ID,
+                        Username = user.UserId,
+                        DateAttempted = now,
+                        Successful = correct
+                    });
                 }
 
-                if (user.QuestionsAttempted == null) user.QuestionsAttempted = new List<QuestionsAttempted>();
-                user.QuestionsAttempted.Add(new QuestionsAttempted
-                {
-                    ID = question.ID,
-                    Correct = correct,
-                    Title = question.Title,
-                    AttemptedDate = DateTime.Now
-                });
+
 
                 await UpserttUserAsync(user);
                 await UpsertQuestionAsync(question);
