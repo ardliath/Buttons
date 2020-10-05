@@ -19,13 +19,14 @@
         <p>@Html.ActionLink("Learn more", "Index", "Question", new { @class = "btn btn-default" })</p>
     </div>
     <div class="col-md-4">
-        <h2>Cool Stuff</h2>
-        <p>ABC</p>
-        <p>@Html.ActionLink("Learn more", "Index", "Question", new { @class = "btn btn-default" })</p>
+        <h2>For Example</h2>
+        <h4>@Model.MostRecentQuestion.Title</h4>
+        <p>@Model.MostRecentQuestion.Text</p>
+        <p>@Html.ActionLink("Do you think you can answer this question?", "Get", "Question", new { id = Model.MostRecentQuestion.Id }, new { @class = "btn btn-default" })</p>
     </div>
     <div class="col-md-4">
-        <h2>More Cool Stuff</h2>
-        <p>123</p>
+        <h2>Track Your Progress</h2>
+        <p>Show off your problem solving!</p>
         <p>@Html.ActionLink("Learn more", "Index", "Question", new { @class = "btn btn-default" })</p>
     </div>
 </div>

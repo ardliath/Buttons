@@ -13,5 +13,6 @@ namespace Buttons.Data
         Task<Question> UpsertQuestionAsync(Question question);
         Task<bool> DeleteQuestion(string id);
         Task<UserAccount> GetUserAsync(string username);
+        Task<Question> GetMostRecentQuestion();
     }
 }

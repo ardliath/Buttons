@@ -22,8 +22,17 @@ namespace Buttons.Controllers
 
         public async Task<ActionResult> Index()
         {
+            var recentQuestion = await _dependency.GetMostRecentQuestion();
+
             var model = new Models.Home.Index
             {
+                MostRecentQuestion = recentQuestion != null
+                    ? new Models.Shared.QuestionSummary
+                    {
+                        Id = recentQuestion.ID,
+                        Title = recentQuestion.Title,
+                        Text = recentQuestion.Text
+                    } : null
             };
             return View(model);
         }

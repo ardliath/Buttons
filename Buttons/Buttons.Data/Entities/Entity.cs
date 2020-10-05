@@ -15,5 +15,8 @@ namespace Buttons.Data.Entities
         public string UserId { get; set; }
 
         public EntityType EntityType { get; set; }
+
+        [JsonProperty(PropertyName ="_ts")]
+        public int Timestamp { get; set; }
     }
 }

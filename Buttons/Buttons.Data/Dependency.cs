@@ -186,5 +186,19 @@ namespace Buttons.Data
         {
             return UriFactory.CreateDocumentCollectionUri("Buttons", "Entities");
         }
+
+        public async Task<Question> GetMostRecentQuestion()
+        {
+            using (var client = CreateDocumentClient())
+            {
+                var mostRecentQuestion = client.CreateDocumentQuery<Question>(CreateDocumentCollectionUri(), new FeedOptions { MaxItemCount = 1, EnableCrossPartitionQuery = true })                    
+                    .Where(s => s.EntityType == EntityType.Question)
+                    .OrderByDescending(q => q.Timestamp)
+                    .AsEnumerable()
+                    .FirstOrDefault();
+
+                return await Task.FromResult(mostRecentQuestion);
+            }
+        }
     }
 }
