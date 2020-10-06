@@ -67,7 +67,7 @@ namespace Buttons.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Login model)
+        public async Task<ActionResult> Login(Login model)
         {
             if(!ModelState.IsValid)
             {
@@ -76,7 +76,10 @@ namespace Buttons.Controllers
 
             if(model.Username == "Adam" && model.Password == "password")
             {
+                var user = await _dependency.GetUserAsync(model.Username);
+
                 Session["UserID"] = model.Username;
+                Session["AvatarUrl"] = string.Concat(user.AvatarUrl, "?s=25&d=identicon&r=PG");
                 return RedirectToAction("Index", "Home");
             }
             else

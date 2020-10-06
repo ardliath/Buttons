@@ -9,6 +9,8 @@ namespace Buttons.Data.Entities
     public class UserAccount : Entity
     {
         public int Score { get; set; }
-        public List<QuestionsAttempted> QuestionsAttempted { get; set; }        
+        public List<QuestionsAttempted> QuestionsAttempted { get; set; }
+
+        public string AvatarUrl { get; set; }
     }
 }

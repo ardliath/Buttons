@@ -11,5 +11,7 @@ namespace Buttons.Models.Shared
         public string Username { get; set; }
 
         public DateTime Date { get; set; }
+
+        public string AvatarUrl { get; set; }
     }
 }

@@ -16,6 +16,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                @if ((bool?)ViewData["IsLoggedIn"] == true)
+                {
+                    <a href='@Url.Action("Get", "Account")'class="navbar-brand">
+                        <img src='@ViewData["AvatarUrl"]' alt='Profile Picture' width="24" height="24" class="d-inline-block align-top" />
+                    </a>
+                }
                 @Html.ActionLink("Buttons", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">

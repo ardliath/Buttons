@@ -15,7 +15,8 @@ namespace Buttons.Filters
             Controller controller = filterContext.Controller as Controller;
             if (controller != null)
             {
-                controller.ViewData["IsLoggedIn"] = filterContext.HttpContext.Session["UserId"] != null;                
+                controller.ViewData["IsLoggedIn"] = filterContext.HttpContext.Session["UserId"] != null;
+                controller.ViewData["AvatarUrl"] = filterContext.HttpContext.Session["AvatarUrl"];
             }            
         }
     }
