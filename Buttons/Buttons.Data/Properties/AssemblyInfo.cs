@@ -8,9 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Buttons.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Callcredit Information Group")]
 [assembly: AssemblyProduct("Buttons.Data")]
-[assembly: AssemblyCopyright("Copyright © Callcredit Information Group 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
